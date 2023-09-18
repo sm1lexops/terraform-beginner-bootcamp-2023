@@ -3,6 +3,9 @@
 - [Prerequisites](#prerequisite-technologies)
 
 - [Semantic Versioning](#semantic-versioning-200)
+
+- [Refacroting Terraform](#refactoring-terraform-cli)
+
 ## Prerequisite Technologies 
 
 > **The bootcamper is required to register an account with the following online cloud services:**
@@ -39,3 +42,36 @@ Given a version number **MAJOR.MINOR.PATCH**, increment the:
 - **MINOR** version when you add functionality in a backward compatible manner
 - **PATCH** version when you make backward compatible bug fixes
 Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
+
+## Refactoring Terraform CLI
+
+> Fix `.gitpod.yml`
+
+```yml
+tasks:
+  - name: terraform
+    before: |
+      sudo apt-get update && sudo apt-get install -y gnupg software-properties-common wget
+      wget -O- https://apt.releases.hashicorp.com/gpg | \
+      gpg --dearmor | \
+      sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+      echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+      sudo apt-get update && sudo apt-get install terraform
+  - name: aws-cli
+    env:
+      AWS_CLI_AUTO_PROMPT: on-partial
+    before: |
+      cd /workspace
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      cd $THEIA_WORKSPACE_ROOT
+vscode:
+  extensions:
+    - amazonwebservices.aws-toolkit-vscode
+    - hashicorp.terraform
+```
+
+- Change `init` to `before`
+
+- Refactoring terraform CLI, link to tutorial [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
