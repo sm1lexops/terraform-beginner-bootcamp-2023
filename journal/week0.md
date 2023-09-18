@@ -231,7 +231,7 @@ random_backet_name_string = "saUWC1GbuYq4KvPc"
 
 > Add to [`main.tf`](https://github.com/sm1lexops/terraform-beginner-bootcamp-2023/blob/week-0/main.tf)
 
-```json
+```tf
 '''''
     aws = {
       source  = "hashicorp/aws"
