@@ -1,5 +1,8 @@
 # Week 0 — Prerequisite Week
 
+- [Prerequisites](#prerequisite-technologies)
+
+- [Semantic Versioning](#semantic-versioning-200)
 ## Prerequisite Technologies 
 
 > **The bootcamper is required to register an account with the following online cloud services:**
@@ -25,3 +28,14 @@ This is a Bring-Your-Own-Account (BYOA) cloud project bootcamp.
 There is a risk of spending while we are performing this bootcamp.
 You will find these potential costs under each respective week.
 We will attempt to stay with free-tier services, and provide guidance to watch out for unexpected spending.
+
+## Semantic Versioning 2.0.0
+
+> Link to [semver.org](https://semver.org)
+
+Given a version number **MAJOR.MINOR.PATCH**, increment the:
+
+- **MAJOR** version when you make incompatible API changes
+- **MINOR** version when you add functionality in a backward compatible manner
+- **PATCH** version when you make backward compatible bug fixes
+Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
