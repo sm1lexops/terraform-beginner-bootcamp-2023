@@ -225,3 +225,29 @@ Outputs:
 random_backet_name_string = "saUWC1GbuYq4KvPc"
 ```
 
+## Terraform AWS S3 Provider
+
+* To learn how to create TF providers and resources at this example we create aws s3 bucket with random name
+
+> Add to [`main.tf`](https://github.com/sm1lexops/terraform-beginner-bootcamp-2023/blob/week-0/main.tf)
+
+```json
+'''''
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.17.0"
+    }
+provider "aws" {
+  
+}
+    ''''
+resource "aws_s3_bucket" "my_random_s3_bucket" {
+  bucket = "my-random-${random_string.bucket_name.id}"
+}
+resource "random_string" "bucket_name" {
+  length  = 16
+  special = false
+  upper   = false
+}
+
+```
