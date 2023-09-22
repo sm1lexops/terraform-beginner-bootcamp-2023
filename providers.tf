@@ -8,5 +8,5 @@ provider "aws" {
 }
 
 provider "random" {
-  
+  description = "Randomizing feature"
 }
