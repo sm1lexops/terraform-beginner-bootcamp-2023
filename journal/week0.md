@@ -249,5 +249,90 @@ resource "random_string" "bucket_name" {
   special = false
   upper   = false
 }
-
 ```
+
+## Terraform Cloud
+
+For our project consistency create dir `projects/tfcloud` add `main.tf`
+
+> [`main.tf`](https://github.com/sm1lexops/terraform-beginner-bootcamp-2023/blob/week-0/projects/tfcloud/main.tf)
+
+```hcl
+terraform {
+  # block `cloud` for terraform cloud connections
+  cloud {
+    organization = "thevopz" # same as in the terraform cloud
+
+    workspaces {
+      name = "tfcloud" # same as in the terraform cloud
+    }
+  }
+  required_providers {
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.5.1"
+    }
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.17.0"
+    }
+  }
+}
+provider "aws" {
+  region = "eu-central-1"
+}
+
+provider "aws" {
+  region = "us-east-1"
+  alias  = "usa"
+}
+
+provider "random" {
+
+}
+resource "aws_s3_bucket" "my_random_s3_bucket" {
+  bucket   = "eu-random-${random_string.bucket_name.id}"
+  provider = aws
+}
+
+resource "aws_s3_bucket" "us_east_s3_bucket" {
+  bucket   = "usa-random-${random_string.bucket_name.id}"
+  provider = aws.usa
+}
+resource "random_string" "bucket_name" {
+  provider = random
+  length   = 16
+  special  = false
+  upper    = false
+}
+```
+
+> Then we should create with same `organization` and `workspaces` env terraform cloud account > project > workspace, choose `Local for CLI` execution mode
+
+* Copy Terraform Token
+
+> Run in `projects/tfcloud`, and insert your token into the cli
+
+```sh
+terraform login # sync and autorize your local env with terraform cloud
+```
+
+* **Alternatively** we can create `credentials.tfrc.json` file withoud copy paste our `TF_TOKEN`
+
+```json
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "$TF_TOKEN"
+    }
+  }
+}
+```
+
+> Then execute
+
+```sh
+terraform init && terraform apply -auto-approve
+```
+
+> In terraform cloud acc you should see created resources and `States` file
