@@ -2,33 +2,28 @@ terraform {
   required_providers {
     random = {
       source  = "hashicorp/random"
-      version = "3.5.1"
+      version = "~> 3.5.1"
     }
     aws = {
       source  = "hashicorp/aws"
-      version = "5.17.0"
+      version = "~> 5.17.0"
     }
   }
 }
 
-provider "aws" {
-  
-}
-provider "random" {
-  # Configuration options
+resource "aws_s3_bucket" "my_random_s3_bucket" {
+  bucket = "eu-random-${random_string.bucket_name.id}"
+  provider = aws
 }
 
-resource "aws_s3_bucket" "my_random_s3_bucket" {
-  bucket = "my-random-${random_string.bucket_name.id}"
+resource "aws_s3_bucket" "us_east_s3_bucket" {
+  bucket = "usa-random-${random_string.bucket_name.id}"
+  provider = aws.usa
 }
 resource "random_string" "bucket_name" {
+  provider = random
   length  = 16
   special = false
   upper   = false
 }
-output "random_bucket_name_string" {
-  value = random_string.bucket_name.id
-}
-output "my_random_s3_bucket" {
-  value = aws_s3_bucket.my_random_s3_bucket.id
-}
+
