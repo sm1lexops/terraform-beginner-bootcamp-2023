@@ -7,7 +7,8 @@ LABEL1="Error: TF_TOKEN env var for terraform cloud is not set."
 LABEL2="credentials.tfrc.json and terraform.tfvars with ENV VAR was created."
 LABEL3="ENV AWS_ACCESS_KEY_ID is not set" 
 LABEL4="ENV AWS_SECRET_ACCESS_KEY is not set" 
-CRED_PATH="/Users/alexsmirnov/.terraform.d/"
+CRED_PATH="/Users/alexsmirnov/.terraform.d"
+CRED_TARGET="${CRED_PATH}/credentials.tfrc.json"
 EU_REGION="eu-central-1"
 US_REGION="us-east-1"
 
@@ -27,7 +28,7 @@ if [ -z "$AWS_SECRET_ACCESS_KEY"]; then
   exit 1
 fi  
 # Create credentials.tfrc.json for terraform cloud auth
-cat > credentials.tfrc.json << EOF
+cat > $CRED_TARGET << EOF
 {
   "credentials": {
     "app.terraform.io": {
