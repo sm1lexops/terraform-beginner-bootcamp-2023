@@ -1,4 +1,11 @@
 terraform {
+    cloud {
+    organization = "thevopz"
+
+    workspaces {
+      name = "root-tf"
+    }
+  }
   required_providers {
     random = {
       source  = "hashicorp/random"
