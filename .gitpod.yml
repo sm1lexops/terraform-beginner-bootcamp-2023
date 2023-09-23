@@ -17,6 +17,9 @@ tasks:
       sudo ./aws/install
       rm -Rf aws*
       cd $THEIA_WORKSPACE_ROOT
+# aws cli for macos
+      #curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+      #sudo installer -pkg AWSCLIV2.pkg -target /
 vscode:
   extensions:
     - amazonwebservices.aws-toolkit-vscode
