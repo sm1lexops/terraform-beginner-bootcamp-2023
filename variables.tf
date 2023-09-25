@@ -10,6 +10,6 @@ variable "aws_europe" {
   description = "EU AWS region "
 }
 
-variable "aws_usa" {
-  description = "US AWS region "
-}
+#variable "aws_usa" {
+#  description = "US AWS region "
+#}
