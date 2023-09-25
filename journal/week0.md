@@ -335,4 +335,14 @@ terraform login # sync and autorize your local env with terraform cloud
 terraform init && terraform apply -auto-approve
 ```
 
-> In terraform cloud acc you should see created resources and `States` file
+> In terraform cloud acc you should see created 
+
+* `Resources` 
+
+![TF Cloud Resources](assets/tf_cloud_resources.jpg)
+
+* and `States` files
+
+![TF Cloud States](assets/tf_cloud_states.jpg)
+
+> Don't forgot `terraform destroy` your aws assets

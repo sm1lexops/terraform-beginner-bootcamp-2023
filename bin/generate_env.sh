@@ -42,7 +42,7 @@ cat > terraform.tfvars << EOF
 aws_secret_key = "$AWS_SECRET_ACCESS_KEY"
 aws_access_key = "$AWS_ACCESS_KEY_ID"
 aws_europe = "$EU_REGION"
-aws_usa = "$US_REGION"
+# aws_usa = "$US_REGION"
 EOF
 
 printf "${CYAN}==== ${LABEL2}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
