@@ -23,10 +23,11 @@ resource "aws_s3_bucket" "my_random_s3_bucket" {
   provider = aws
 }
 
-resource "aws_s3_bucket" "us_east_s3_bucket" {
-  bucket = "usa-random-${random_string.bucket_name.id}"
-  provider = aws.usa
-}
+# If we want to create another bucket, using another name prefix
+#resource "aws_s3_bucket" "us_east_s3_bucket" {
+#  bucket = "usa-random-${random_string.bucket_name.id}"
+#  provider = aws.usa
+#}
 resource "random_string" "bucket_name" {
   provider = random
   length  = 16

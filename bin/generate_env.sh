@@ -1,5 +1,5 @@
 #! /usr/bin/env zsh
-set -xe
+set -e
 
 CYAN='\033[1;36m'
 NO_COLOR='\033[0m'
@@ -8,22 +8,22 @@ LABEL2="credentials.tfrc.json and terraform.tfvars with ENV VAR was created."
 LABEL3="ENV AWS_ACCESS_KEY_ID is not set" 
 LABEL4="ENV AWS_SECRET_ACCESS_KEY is not set" 
 CRED_PATH="/Users/alexsmirnov/.terraform.d"
-CRED_TARGET="${CRED_PATH}/credentials.tfrc.json"
+CRED_TARGET="credentials.tfrc.json"
 EU_REGION="eu-central-1"
 US_REGION="us-east-1"
 
 # Check ENV VAR 
-if [ -z "$TF_TOKEN"]; then
+if [ -z "$TF_TOKEN" ]; then
   printf "${CYAN}==== ${LABEL1}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
   exit 1
 fi
 
-if [ -z "$AWS_ACCESS_KEY_ID"]; then
+if [ -z "$AWS_ACCESS_KEY_ID" ]; then
   printf "${CYAN}==== ${LABEL3}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
   exit 1
 fi  
 
-if [ -z "$AWS_SECRET_ACCESS_KEY"]; then
+if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   printf "${CYAN}==== ${LABEL4}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
   exit 1
 fi  
