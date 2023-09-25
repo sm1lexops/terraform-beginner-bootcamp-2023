@@ -8,6 +8,8 @@
 
 - [Terraform Files and Structure](#terraform-files-and-structure)
 
+- [Terraform Cloud](#terraform-cloud)
+
 ## Prerequisite Technologies 
 
 > **The bootcamper is required to register an account with the following online cloud services:**
