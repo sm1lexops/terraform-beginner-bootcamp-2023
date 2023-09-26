@@ -1,4 +1,4 @@
-#! /usr/bin/env zsh
+#! /usr/bin/env bash
 set -e
 
 CYAN='\033[1;36m'
@@ -7,6 +7,7 @@ LABEL1="Error: TF_TOKEN env var for terraform cloud is not set."
 LABEL2="credentials.tfrc.json and terraform.tfvars with ENV VAR was created."
 LABEL3="ENV AWS_ACCESS_KEY_ID is not set" 
 LABEL4="ENV AWS_SECRET_ACCESS_KEY is not set" 
+LABEL5="ENV TF_USER_UUID is not set"
 CRED_PATH="/Users/alexsmirnov/.terraform.d"
 CRED_TARGET="credentials.tfrc.json"
 EU_REGION="eu-central-1"
@@ -27,6 +28,11 @@ if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   printf "${CYAN}==== ${LABEL4}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
   exit 1
 fi  
+
+if [ -z "$TF_USER_UUID" ]; then
+  printf "${CYAN}==== ${LABEL5}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+  exit 1
+fi  
 # Create credentials.tfrc.json for terraform cloud auth
 cat > $CRED_TARGET << EOF
 {
@@ -42,6 +48,7 @@ cat > terraform.tfvars << EOF
 aws_secret_key = "$AWS_SECRET_ACCESS_KEY"
 aws_access_key = "$AWS_ACCESS_KEY_ID"
 aws_europe = "$EU_REGION"
+user_uuid = "$TF_USER_UUID"
 # aws_usa = "$US_REGION"
 EOF
 
