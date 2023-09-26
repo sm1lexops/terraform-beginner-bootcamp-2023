@@ -1,3 +1,3 @@
-output "random_bucket_name_string" {
-  value = random_string.bucket_name.result
+output "tf_bucket_name" {
+  value = aws_s3_bucket.tf_bucket.bucket
 }

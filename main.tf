@@ -7,10 +7,6 @@ terraform {
     }
   }
   required_providers {
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.5.1"
-    }
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.17.0"
@@ -18,8 +14,8 @@ terraform {
   }
 }
 
-resource "aws_s3_bucket" "my_random_s3_bucket" {
-  bucket = "eu-random-${random_string.bucket_name.id}"
+resource "aws_s3_bucket" "tf_bucket" {
+  bucket = "eu-tf-bucket-${var.user_uuid}"
   provider = aws
   
   tags = {
@@ -33,9 +29,4 @@ resource "aws_s3_bucket" "my_random_s3_bucket" {
 #  bucket = "usa-random-${random_string.bucket_name.id}"
 #  provider = aws.usa
 #}
-resource "random_string" "bucket_name" {
-  provider = random
-  length  = 16
-  special = false
-  upper   = false
-}
+
