@@ -14,6 +14,16 @@ variable "aws_europe" {
 #  description = "US AWS region "
 #}
 
+# Can set bucket name as variable and validate it
+#variable "s3_bucket_name" {
+#  description = "Name of the S3 bucket"
+#  type        = string
+#  validation {
+#    condition     = can(length(var.s3_bucket_name) >= 8) && can(length(var.s3_bucket_name) <= 40)
+#    error_message = "S3 bucket name must be between 8 and 40 characters in length"
+#  }
+#}
+
 variable "user_uuid" {
   description = "The UUID of the user"
   type        = string
