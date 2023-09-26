@@ -21,6 +21,11 @@ terraform {
 resource "aws_s3_bucket" "my_random_s3_bucket" {
   bucket = "eu-random-${random_string.bucket_name.id}"
   provider = aws
+  
+  tags = {
+    tf_user_uuid = var.user_uuid
+    description = "Terraform Bootcamp User uuid"
+  }
 }
 
 # If we want to create another bucket, using another name prefix
@@ -34,4 +39,3 @@ resource "random_string" "bucket_name" {
   special = false
   upper   = false
 }
-
