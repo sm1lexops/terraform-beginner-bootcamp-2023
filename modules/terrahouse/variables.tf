@@ -24,10 +24,10 @@ variable "bucket" {
 
   validation {
     condition     = (
-      length(var.bucket) >= 10 && length(var.bucket) <= 40 && 
+      length(var.bucket) >= 10 && length(var.bucket) <= 60 && 
       can(regex("^[a-z0-9][a-z0-9-.]*[a-z0-9]$", var.bucket))
     )
-    error_message = "The bucket name must be between 10 and 40 characters, start and end with a lowercase letter or number, and can contain only lowercase letters, numbers, hyphens, and dots."
+    error_message = "The bucket name must be between 10 and 60 characters, start and end with a lowercase letter or number, and can contain only lowercase letters, numbers, hyphens, and dots."
   } 
 }
 
