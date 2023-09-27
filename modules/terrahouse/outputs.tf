@@ -4,5 +4,5 @@
 
 output "aws_s3_bucket_id" {
   description   = "Name of S3 bucket"
-  value         = module.terrahouse.aws_s3_bucket_id
+  value         = try(aws_s3_bucket.this[0].id, "")
 }

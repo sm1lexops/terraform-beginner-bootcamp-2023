@@ -81,3 +81,44 @@ import {
   id = "bucket_name" # in our case "eu-tf-bucket-${var.user_uuid}", the name of created AWS cloud bucket   
 }
 ```
+
+## Terraform Modules
+
+> [Terraform Modules Docs](https://developer.hashicorp.com/terraform/language/modules)
+
+### Module Sources
+
+> The module installer supports installation from a number of different source types.
+
+* Local paths
+
+* Terraform Registry
+
+* GitHub
+
+* Bitbucket
+
+* Generic Git, Mercurial repositories
+
+* HTTP URLs
+
+* S3 buckets
+
+* GCS buckets
+
+* Modules in Package Sub-directories
+
+* GitHub
+
+* Bitbucket
+
+* Generic Git, Mercurial repositories
+
+* HTTP URLs
+
+* S3 buckets
+
+GCS buckets
+
+Modules in Package Sub-directories
+
