@@ -48,7 +48,7 @@ alias tfd='terraform destroy -auto-approve'
 j
 Terraform evaluates variables in this order. If a variable is defined or assigned at a higher-precedence level, it will override any values set at a lower-precedence level.
 
-For example, if you define a variable with a default value in your .tf configuration file and then provide a different value for that variable in a .tfvars file, the value from the .tfvars file takes precedence when you run terraform apply.
+For example, if you defined a variable with a default value in your .tf configuration file and then provide a different value for that variable in a .tfvars file, the value from the .tfvars file takes precedence when you run terraform apply.
 
 ### Import
 
