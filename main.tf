@@ -1,19 +1,3 @@
-terraform {
-    cloud {
-    organization = "thevopz"
-
-    workspaces {
-      name = "root-tf"
-    }
-  }
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.17.0"
-    }
-  }
-}
-
 resource "aws_s3_bucket" "tf_bucket" {
   bucket = "eu-tf-bucket-${var.user_uuid}"
   provider = aws
