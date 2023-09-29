@@ -282,3 +282,19 @@ terraform {
   }
 }
 ```
+
+> To instal module we can use
+
+```sh
+terraform get # install module
+# or
+terraform init #  initialize backends and install plugins, install and update module
+```
+
+> To update for example outputs block (when you forgot add outputs)
+
+ This command instructs Terraform to refresh the state of your infrastructure. It will re-fetch the current state of your resources from your cloud provider (e.g., AWS, Azure) and update the local Terraform state file without making any changes to the infrastructure. This command is useful for ensuring that your Terraform state accurately reflects the real state of your resources in your cloud environment.
+ 
+```sh
+terraform apply -refresh-only 
+```
