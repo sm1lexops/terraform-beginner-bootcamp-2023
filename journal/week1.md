@@ -122,3 +122,163 @@ GCS buckets
 
 Modules in Package Sub-directories
 
+### Build and use a local module
+
+-  Terraform treats every configuration as a module. When you run terraform commands, or use Terraform Cloud or Terraform Enterprise to remotely run Terraform, the target directory containing Terraform configuration is treated as the root module.
+
+In this tutorial, you will create a module to manage AWS S3 buckets used to host static websites.
+
+### Module Structure
+
+```sh
+.
+├── LICENSE
+├── README.md
+├── main.tf
+├── variables.tf
+├── outputs.tf
+```
+
+> There are also some other files to be aware of, and ensure that you don't distribute them as part of your module:
+
+* `terraform.tfstate` and `terraform.tfstate.backup`: These files contain your Terraform state, and are how Terraform keeps track of the relationship between your configuration and the infrastructure provisioned by it.
+
+* `.terraform`: This directory contains the modules and plugins used to provision your infrastructure. These files are specific to a specific instance of Terraform when provisioning infrastructure, not the configuration of the infrastructure defined in .tf files.
+
+* `*.tfvars`: Since module input variables are set via arguments to the module block in your configuration, you don't need to distribute any *.tfvars files with your module, unless you are also using it as a standalone Terraform configuration.
+
+### Create Module
+
+> Create `modules/terrahouse` directory and all files in **Module Structrue** above
+
+After creating these directories, your configuration's directory structure will look like this:
+
+```sh
+.
+├── LICENSE
+├── README.md
+├── main.tf
+├── modules
+│   └── terrahouse
+│       └── main.tf
+│       └── outputs.tf
+│       └── variables.tf
+│       └── README.md
+        └── LICENSE
+├── outputs.tf
+├── terraform.tfstate
+├── terraform.tfstate.backup
+└── variables.tf
+└── versions.tf
+```
+
+* Module S3
+ 
+> `main.tf`
+
+```tf
+resource "aws_s3_bucket" "this" {
+  count           = var.create ? 1 : 0
+
+  bucket          = var.bucket
+  acl             = var.acl
+  tags            = var.tags
+}
+```
+
+> `outputs.tf`
+
+```tf
+output "aws_s3_bucket_id" {
+  description   = "Name of S3 bucket"
+  value         = try(aws_s3_bucket.this[0].id, "")
+}
+```
+
+> `variables.tf`
+
+```tf
+variable "create" {
+  description   = "Create bucket or not"
+  type          = bool
+  default       = true 
+}
+
+variable "bucket" {
+  description   = "The name of the s3 bucket"
+  type          = string
+  default       = ""
+
+  validation {
+    condition     = (
+      length(var.bucket) >= 10 && length(var.bucket) <= 60 && 
+      can(regex("^[a-z0-9][a-z0-9-.]*[a-z0-9]$", var.bucket))
+    )
+    error_message = "The bucket name must be between 10 and 60 characters, start and end with a lowercase letter or number, and can contain only lowercase letters, numbers, hyphens, and dots."
+  } 
+}
+
+variable "acl" {
+  description   = "The ACL linked to the bucket"
+  type          = string 
+  default = null
+}
+
+variable "tags" {
+  description   = "A map of tags asign to the bucket"
+  type          = map(string) 
+  default = {}
+}
+```
+
+* Root 
+
+> `main.tf`
+
+```tf
+provider "aws" {
+  region      = local.region  
+}
+
+locals {
+  region      = "eu-central-1"
+  user_uuid   = var.user_uuid
+} 
+module "terrahouse" {
+  source      = "./modules/terrahouse"
+
+  bucket      = "my-bucket-c7f8d132-bac3-41e5-8cfc-f35779b73f8f"
+}
+```
+
+> `outputs.tf`
+
+```tf
+output "aws_s3_bucket_name" {
+  description   = "Name of S3 bucket"
+  value         = module.terrahouse.aws_s3_bucket_id
+}
+```
+
+> `versions.tf`
+
+```tf
+terraform {
+    required_version = ">= 1.5.0"
+
+    required_providers {
+      aws = {
+        source  = "hashicorp/aws"
+        version = ">= 5.17.0"
+      }
+    }
+
+    cloud {
+    organization = "thevopz"
+
+    workspaces {
+      name = "root-tf"
+    }
+  }
+}
+```
