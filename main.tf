@@ -1,32 +1,17 @@
-terraform {
-    cloud {
-    organization = "thevopz"
+################################################################################
+# Provision Block
+################################################################################
 
-    workspaces {
-      name = "root-tf"
-    }
-  }
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.17.0"
-    }
-  }
+provider "aws" {
+  region      = local.region  
 }
 
-resource "aws_s3_bucket" "tf_bucket" {
-  bucket = "eu-tf-bucket-${var.user_uuid}"
-  provider = aws
-  
-  tags = {
-    tf_user_uuid = var.user_uuid
-    description = "Terraform Bootcamp User uuid"
-  }
+locals {
+  region      = "eu-central-1"
+  user_uuid   = var.user_uuid
+} 
+module "terrahouse" {
+  source      = "./modules/terrahouse"
+
+  bucket      = "my-bucket-c7f8d132-bac3-41e5-8cfc-f35779b73f8f"
 }
-
-# If we want to create another bucket, using another name prefix
-#resource "aws_s3_bucket" "us_east_s3_bucket" {
-#  bucket = "usa-random-${random_string.bucket_name.id}"
-#  provider = aws.usa
-#}
-

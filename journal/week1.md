@@ -48,7 +48,7 @@ alias tfd='terraform destroy -auto-approve'
 j
 Terraform evaluates variables in this order. If a variable is defined or assigned at a higher-precedence level, it will override any values set at a lower-precedence level.
 
-For example, if you define a variable with a default value in your .tf configuration file and then provide a different value for that variable in a .tfvars file, the value from the .tfvars file takes precedence when you run terraform apply.
+For example, if you defined a variable with a default value in your .tf configuration file and then provide a different value for that variable in a .tfvars file, the value from the .tfvars file takes precedence when you run terraform apply.
 
 ### Import
 
@@ -81,3 +81,44 @@ import {
   id = "bucket_name" # in our case "eu-tf-bucket-${var.user_uuid}", the name of created AWS cloud bucket   
 }
 ```
+
+## Terraform Modules
+
+> [Terraform Modules Docs](https://developer.hashicorp.com/terraform/language/modules)
+
+### Module Sources
+
+> The module installer supports installation from a number of different source types.
+
+* Local paths
+
+* Terraform Registry
+
+* GitHub
+
+* Bitbucket
+
+* Generic Git, Mercurial repositories
+
+* HTTP URLs
+
+* S3 buckets
+
+* GCS buckets
+
+* Modules in Package Sub-directories
+
+* GitHub
+
+* Bitbucket
+
+* Generic Git, Mercurial repositories
+
+* HTTP URLs
+
+* S3 buckets
+
+GCS buckets
+
+Modules in Package Sub-directories
+
