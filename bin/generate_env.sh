@@ -45,9 +45,9 @@ cat > $CRED_TARGET << EOF
 EOF
 
 cat > terraform.tfvars << EOF
-aws_secret_key = "$AWS_SECRET_ACCESS_KEY"
-aws_access_key = "$AWS_ACCESS_KEY_ID"
-aws_europe = "$EU_REGION"
+#aws_secret_key = "$AWS_SECRET_ACCESS_KEY"
+#aws_access_key = "$AWS_ACCESS_KEY_ID"
+#aws_europe = "$EU_REGION"
 user_uuid = "$TF_USER_UUID"
 # aws_usa = "$US_REGION"
 EOF
