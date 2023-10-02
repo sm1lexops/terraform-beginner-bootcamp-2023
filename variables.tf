@@ -15,8 +15,10 @@ variable "file_source" {
 
 variable "path_to_index" {
   type          = string
+  default       = "/modules/terrahouse/www/index.html"
 }
 
 variable "path_to_error" {
   type          = string
+  default       = "/modules/terrahouse/www/error.html"
 }
