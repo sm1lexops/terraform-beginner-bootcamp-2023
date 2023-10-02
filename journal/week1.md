@@ -298,3 +298,13 @@ terraform init #  initialize backends and install plugins, install and update mo
 ```sh
 terraform apply -refresh-only 
 ```
+
+## AWS S3 Static Website Hosting
+
+1. Create s3 bucket 
+
+2. Create s3 website hosting resource
+
+3. Create s3 objects for `index` and `error` html static files
+
+> [Commit on the changes Made](#16)
