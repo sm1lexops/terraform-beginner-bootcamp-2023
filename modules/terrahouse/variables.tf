@@ -32,3 +32,15 @@ variable "tags" {
   type          = map(string) 
   default = {}
 }
+
+variable "path_to_index" {
+  description   = "Path to index.html"
+  type          = string
+  default       = "/modules/terrahouse/www/index.html"
+}
+
+variable "path_to_error" {
+  description   = "Path to error.html"
+  type          = string
+  default       = "/modules/terrahouse/www/error.html"
+}

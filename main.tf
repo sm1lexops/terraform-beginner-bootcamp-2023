@@ -7,8 +7,10 @@ provider "aws" {
 }
 
 locals {
-  region      = "eu-central-1"
-  user_uuid   = var.user_uuid
+  region        = "eu-central-1"
+  user_uuid     = var.user_uuid
+  path_to_index = var.path_to_index 
+  path_to_error = var.path_to_error
 } 
 module "terrahouse" {
   source      = "./modules/terrahouse"

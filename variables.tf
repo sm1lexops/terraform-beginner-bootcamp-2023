@@ -12,3 +12,11 @@ variable "file_source" {
   type          = string
   default       = null
 }
+
+variable "path_to_index" {
+  type          = string
+}
+
+variable "path_to_error" {
+  type          = string
+}
