@@ -307,4 +307,6 @@ terraform apply -refresh-only
 
 3. Create s3 objects for `index` and `error` html static files
 
-> [Commit on the changes Made](#16)
+> [Resolved Issues Branch](https://github.com/sm1lexops/terraform-beginner-bootcamp-2023/tree/16-aws-s3-static-website-hosting)
+
+> [Commit s3 static website hosting implemantation](https://github.com/sm1lexops/terraform-beginner-bootcamp-2023/commit/4b7a0aa3739e6da38420d6733d19dc55274cf1b3)
