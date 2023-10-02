@@ -16,7 +16,8 @@ resource "aws_s3_bucket" "this" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration
-resource "aws_s3_bucket_website_configuration" "website_configuration" {
+
+resource "aws_s3_bucket_website_configuration" "this" {
   bucket = aws_s3_bucket.this[0].bucket
   index_document {
     suffix = "index.html"
