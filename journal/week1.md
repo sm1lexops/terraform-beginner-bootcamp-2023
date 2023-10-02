@@ -310,3 +310,30 @@ terraform apply -refresh-only
 > [Resolved Issues Branch](https://github.com/sm1lexops/terraform-beginner-bootcamp-2023/tree/16-aws-s3-static-website-hosting)
 
 > [Commit s3 static website hosting implemantation](https://github.com/sm1lexops/terraform-beginner-bootcamp-2023/commit/4b7a0aa3739e6da38420d6733d19dc55274cf1b3)
+
+## Content Delivery Network
+
+For using CDN for S3 bucket static website hosting need add next resources:
+
+1. CloudFront Distribution
+
+2. CloudFront Origin Access Control (OAC)
+
+3. S3 bucket policy for OAC `jsonencode` block
+
+4. Data aws_caller_identity for `account id`
+
+5. content_type for s3_object
+
+6. Before New Deploy `terraform apply` Clear cache for CDN, create invalidation `/*`
+
+### CloudFront Distribution
+
+> [CloudFront Distribution Resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution)
+
+
+### CloudFront Origin Access Control
+
+> [CloudFront OAC](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control)
+
+> [S3 bucket policy example](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
