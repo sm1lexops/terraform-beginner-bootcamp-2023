@@ -33,22 +33,20 @@ variable "tags" {
   default = {}
 }
 
-variable "index_html_filepath" {
-  description = "The file path for index.html"
-  type        = string
-
+variable "path_to_index" {
+  description   = "Path to index.html"
+  type          = string
   validation {
-    condition     = fileexists(var.index_html_filepath)
-    error_message = "The provided path for index.html does not exist."
+  condition     = fileexists(var.path_to_index)
+  error_message = "The provided path for index.html does not exist."
   }
 }
 
-variable "error_html_filepath" {
-  description = "The file path for error.html"
-  type        = string
-
+variable "path_to_error" {
+  description   = "Path to error.html"
+  type          = string
   validation {
-    condition     = fileexists(var.error_html_filepath)
-    error_message = "The provided path for error.html does not exist."
+  condition     = fileexists(var.path_to_error)
+  error_message = "The provided path for error.html does not exist."
   }
 }
