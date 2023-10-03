@@ -11,3 +11,8 @@ output "aws_s3_website_endpoint" {
   description = "AWS S3 Website Endpoint"
   value = module.terrahouse.website_endpoint
 }
+
+output "cloudfront_url" {
+  description = "CloudFront URL"
+  value = module.terrahouse.cloudfront_url
+}

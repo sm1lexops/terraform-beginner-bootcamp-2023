@@ -7,6 +7,14 @@ locals {
   s3_origin_id = "MyS3Origin"
 }
 
+resource "terraform_data" "invalidate_cache" {
+  triggers_replace = terraform_data.content_version.output
+
+  provisioner "local-exec" {
+    command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.s3static.id} --paths '/*'"
+  }
+}
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control
 resource "aws_cloudfront_origin_access_control" "s3static" {
   name                              = "OAC-${var.bucket}"
