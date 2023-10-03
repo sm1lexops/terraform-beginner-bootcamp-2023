@@ -403,4 +403,7 @@ output "cloudfront_url" {
 
 Check all your terraform resources and static website hosting might be work `terraform apply -auto-approve`
 
+> All changes made [Commit Cache Invalidations](https://github.com/sm1lexops/terraform-beginner-bootcamp-2023/commit/c756a0d1ddb6cf37d298c6f964c74a5d1b3483c9)
+
 ![S3 Static Website Hosting](assets/s3static.jpg)
+
