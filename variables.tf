@@ -20,3 +20,7 @@ variable "path_to_index" {
 variable "path_to_error" {
   type          = string
 }
+
+variable "content_version" {
+  type          = number 
+}     

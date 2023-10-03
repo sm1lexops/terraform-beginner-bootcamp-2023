@@ -337,3 +337,13 @@ For using CDN for S3 bucket static website hosting need add next resources:
 > [CloudFront OAC](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control)
 
 > [S3 bucket policy example](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
+
+## Resource Versioning and Cache Invalidation
+
+### Lifecycle of Resources
+
+> [Lifecycle Meta-Argument](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
+
+For Versioning we using `terraform_data` resource [Link to Docs](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
+
+* The terraform_data resource is useful for storing values which need to follow a manage resource lifecycle, and for triggering provisioners when there is no other logical managed resource in which to place them.
