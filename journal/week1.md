@@ -407,3 +407,58 @@ Check all your terraform resources and static website hosting might be work `ter
 
 ![S3 Static Website Hosting](assets/s3static.jpg)
 
+### Assets and Data Structure
+
+[Data Structure and Type Constraints](https://developer.hashicorp.com/terraform/language/expressions/type-constraints)
+
+### For Each Expressions
+
+For each allows us to enumerate over complex data types
+
+```sh
+[for s in var.list : upper(s)]
+```
+
+This is mostly useful when you are creating multiples of a cloud resource and you want to reduce the amount of repetitive terraform code.
+
+[For Each Expressions](https://developer.hashicorp.com/terraform/language/expressions/for)
+
+We should difine s3 object and load our image to bucket
+
+> add to `index.html` path to our images
+
+```html
+        <h2>Today musician and Rick<h2>
+            <img src="/assets/karol_szymanowskis.png" />
+            <img src="/assets/rick.jpg" />
+```
+
+> add our s3 object `resource-s3.tf`
+
+```tf
+resource "aws_s3_object" "upload_assets" {
+  for_each     = fileset("${path.root}/modules/terrahouse/assets/", "*.{jpg,png,gif}") 
+  bucket        = aws_s3_bucket.this[0].bucket
+  key           = "assets/${each.key}"
+  source        = "${path.root}/modules/terrahouse/assets/${each.key}"
+  etag          = filemd5("${path.root}/modules/terrahouse/assets/${each.key}")
+  lifecycle {
+    replace_triggered_by  = [ terraform_data.content_version.output ]    
+    ignore_changes        = [ etag ]
+  }
+}
+```
+
+- Terraform resource block for uploading assets to an AWS S3 bucket. It uses the `for_each` meta-argument 
+to iterate over a set of files that match specific patterns (jpg, png, gif) in a local directory 
+and upload each of them to the S3 bucket. Let's break down what this code does:
+
+  * `for_each`: The for_each argument is used to iterate over a set of files in the local directory specified by the fileset function. The fileset function matches files with extensions .jpg, .png, or .gif in the specified directory.
+
+  * `bucket`: The bucket attribute is set to the name of the S3 bucket where the objects will be uploaded. It appears to reference an AWS S3 bucket resource named aws_s3_bucket.this[0].
+
+  * `key`: The key attribute specifies the S3 object key under which the uploaded object will be stored in the bucket. It uses the each.key variable, which represents the file name of the asset. Objects are stored in a directory named "assets" within the bucket.
+
+  * `source`: The source attribute specifies the local path of the file to be uploaded to S3. It uses the each.key variable to reference the current file from the fileset result.
+
+  * `etag`: The etag attribute calculates the ETag (entity tag) of the local file using the filemd5 function. The ETag is used to validate the integrity of the uploaded object.

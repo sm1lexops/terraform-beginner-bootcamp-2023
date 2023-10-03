@@ -50,8 +50,20 @@ resource "aws_s3_object" "error_html" {
   etag          = filemd5(var.path_to_error)
 
   lifecycle {
-    replace_triggered_by = [ terraform_data.content_version.output ]    
-    ignore_changes = [ etag ]
+    replace_triggered_by  = [ terraform_data.content_version.output ]    
+    ignore_changes        = [ etag ]
+  }
+}
+
+resource "aws_s3_object" "upload_assets" {
+  for_each     = fileset("${path.root}/modules/terrahouse/assets/", "*.{jpg,png,gif}") 
+  bucket        = aws_s3_bucket.this[0].bucket
+  key           = "assets/${each.key}"
+  source        = "${path.root}/modules/terrahouse/assets/${each.key}"
+  etag          = filemd5("${path.root}/modules/terrahouse/assets/${each.key}")
+  lifecycle {
+    replace_triggered_by  = [ terraform_data.content_version.output ]    
+    ignore_changes        = [ etag ]
   }
 }
 
