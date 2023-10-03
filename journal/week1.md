@@ -347,3 +347,60 @@ For using CDN for S3 bucket static website hosting need add next resources:
 For Versioning we using `terraform_data` resource [Link to Docs](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
 
 * The terraform_data resource is useful for storing values which need to follow a manage resource lifecycle, and for triggering provisioners when there is no other logical managed resource in which to place them.
+
+### CloudFront Cache Invalidation
+
+We need to Add resource 
+
+```tf
+resource "terraform_data" "invalidate_cache" {
+  triggers_replace = terraform_data.content_version.output
+
+  provisioner "local-exec" {
+    command = <<EOT 
+    "aws cloudfront create-invalidation \
+    --distribution-id ${aws_cloudfront_distribution.s3static.id} \
+    --paths '/*'"
+    EOT
+  }
+}
+```
+
+Where:
+
+* `triggers_replace = terraform_data.content_version.output`: The triggers_replace argument specifies that this resource should be triggered by changes in the output of another data source or resource named 
+
+* `terraform_data.content_version. When the terraform_data.content_version` data source or resource changes, it triggers this resource to be reevaluated.
+
+* `provisioner "local-exec"`: Within this resource block, a "local-exec" provisioner is defined. A provisioner allows you to run local commands or scripts during the resource creation or update process.
+
+* `command = <<EOT ... EOT`: The command attribute specifies the command that will be executed. It appears to be a command that uses the AWS CLI to create a cache invalidation for an AWS CloudFront distribution.
+
+* `aws cloudfront create-invalidation`: This is the AWS CLI command used to create a cache invalidation.
+
+* `--distribution-id ${aws_cloudfront_distribution.s3static.id}`: This part of the command specifies the CloudFront distribution's ID, which seems to be obtained from a resource named aws_cloudfront_distribution.s3static.
+
+* `--paths '/*'`: This part of the command indicates that the invalidation should apply to all files and paths within the CloudFront distribution.
+
+Add output `cloudfront_url` 
+
+> module:
+
+```tf
+output "cloudfront_url" {
+  value         = aws_cloudfront_distribution.s3static.domain_name 
+}
+```
+
+> root:
+
+```tf
+output "cloudfront_url" {
+  description = "CloudFront URL"
+  value = module.terrahouse.cloudfront_url
+}
+```
+
+Check all your terraform resources and static website hosting might be work `terraform apply -auto-approve`
+
+![S3 Static Website Hosting](assets/s3static.jpg)
