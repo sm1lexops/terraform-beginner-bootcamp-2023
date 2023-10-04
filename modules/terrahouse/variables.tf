@@ -21,12 +21,6 @@ variable "bucket" {
   } 
 }
 
-variable "acl" {
-  description   = "The ACL linked to the bucket"
-  type          = string 
-  default = null
-}
-
 variable "tags" {
   description   = "A map of tags asign to the bucket"
   type          = map(string) 
