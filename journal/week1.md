@@ -1,17 +1,25 @@
 # Week 1 — Terraform Beginner Bootcamp 2023
 
 - [Week 1 — Terraform Beginner Bootcamp 2023](#week-1---terraform-beginner-bootcamp-2023)
-
   * [Terraform Aliases](#terraform-aliases)
-  
   * [Terraform Variables, Import and Configurations Drift](#terraform-variables--import-and-configurations-drift)
-
     + [Terraform Variables Precedence Order](#terraform-variables-precedence-order)
-
     + [Import](#import)
-
     + [Configurations Drift](#configurations-drift)
-
+  * [Terraform Modules](#terraform-modules)
+    + [Module Sources](#module-sources)
+    + [Build and use a local module](#build-and-use-a-local-module)
+    + [Module Structure](#module-structure)
+    + [Create Module](#create-module)
+  * [AWS S3 Static Website Hosting](#aws-s3-static-website-hosting)
+  * [Content Delivery Network](#content-delivery-network)
+    + [CloudFront Distribution](#cloudfront-distribution)
+    + [CloudFront Origin Access Control](#cloudfront-origin-access-control)
+  * [Resource Versioning and Cache Invalidation](#resource-versioning-and-cache-invalidation)
+    + [Lifecycle of Resources](#lifecycle-of-resources)
+    + [CloudFront Cache Invalidation](#cloudfront-cache-invalidation)
+    + [Assets and Data Structure](#assets-and-data-structure)
+    + [For Each Expressions](#for-each-expressions)
 ## Terraform Aliases
 
 > To made execute terraform commands easier, we should add aliases to our `~/.bashrc` or `~/.zshrc` file
