@@ -20,6 +20,7 @@
     + [CloudFront Cache Invalidation](#cloudfront-cache-invalidation)
     + [Assets and Data Structure](#assets-and-data-structure)
     + [For Each Expressions](#for-each-expressions)
+
 ## Terraform Aliases
 
 > To made execute terraform commands easier, we should add aliases to our `~/.bashrc` or `~/.zshrc` file
