@@ -28,7 +28,7 @@ bundler --version
 * Install gems (dependencies)
 
 ```sh
-bundle install
+sudo bundle install
 ```
 
 * Install ruby script
