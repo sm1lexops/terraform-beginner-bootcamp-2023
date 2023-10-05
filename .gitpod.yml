@@ -9,7 +9,7 @@ tasks:
       sudo apt-get update && sudo apt-get install terraform
   - name: sinatra
     before: | 
-      cd $PROJECT_ROOT
+      cd $THEIA_WORKSPACE_ROOT
       cd terratowns_mock_server
       bundle install
       bundle exec ruby server.rb 
