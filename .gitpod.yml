@@ -1,5 +1,7 @@
 tasks:
   - name: terraform
+    env:
+      TF_LOG: DEBUG
     before: |
       sudo apt-get update && sudo apt-get install -y gnupg software-properties-common wget
       wget -O- https://apt.releases.hashicorp.com/gpg | \
