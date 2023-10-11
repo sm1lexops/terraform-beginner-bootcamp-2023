@@ -17,8 +17,8 @@ resource "terraform_data" "invalidate_cache" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control
 resource "aws_cloudfront_origin_access_control" "s3static" {
-  name                              = "OAC-${var.bucket}"
-  description                       = "Origin Access Control for Static Website Hosting ${var.bucket}"
+  name                              = "OAC-${aws_s3_bucket.this[0].bucket}"
+  description                       = "Origin Access Control for Static Website Hosting ${aws_s3_bucket.this[0].bucket}"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
@@ -34,7 +34,7 @@ resource "aws_cloudfront_distribution" "s3static" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "Static website hosting for: ${var.bucket}"
+  comment             = "Static website hosting for: ${aws_s3_bucket.this[0].bucket}"
   default_root_object = "index.html"
 
   #aliases = ["mysite.example.com", "yoursite.example.com"]

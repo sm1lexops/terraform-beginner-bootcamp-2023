@@ -6,7 +6,6 @@
 resource "aws_s3_bucket" "this" {
   count           = var.create ? 1 : 0
 
-  bucket          = var.bucket
   tags            = var.tags
 }
 

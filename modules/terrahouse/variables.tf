@@ -7,19 +7,19 @@ variable "create" {
   default       = true 
 }
 
-variable "bucket" {
-  description   = "The name of the s3 bucket"
-  type          = string
-  default       = ""
-
-  validation {
-    condition     = (
-      length(var.bucket) >= 10 && length(var.bucket) <= 60 && 
-      can(regex("^[a-z0-9][a-z0-9-.]*[a-z0-9]$", var.bucket))
-    )
-    error_message = "The bucket name must be between 10 and 60 characters, start and end with a lowercase letter or number, and can contain only lowercase letters, numbers, hyphens, and dots."
-  } 
-}
+#variable "bucket" {
+#  description   = "The name of the s3 bucket"
+#  type          = string
+#  default       = ""
+#
+#  validation {
+#    condition     = (
+#      length(var.bucket) >= 10 && length(var.bucket) <= 60 && 
+#      can(regex("^[a-z0-9][a-z0-9-.]*[a-z0-9]$", var.bucket))
+#    )
+#    error_message = "The bucket name must be between 10 and 60 characters, start and end with a lowercase letter or number, and can contain only lowercase letters, numbers, hyphens, and dots."
+#  } 
+#}
 
 variable "tags" {
   description   = "A map of tags asign to the bucket"
@@ -52,4 +52,13 @@ variable "content_version" {
     condition     = var.content_version > 0 && floor(var.content_version) == var.content_version
     error_message = "content_version must be a positive integer starting at 1."
   }
+}
+
+variable "assets_path" {
+  description = "Path to Assets"
+  type        = string
+}
+
+variable "user_uuid" {
+  type        = string
 }

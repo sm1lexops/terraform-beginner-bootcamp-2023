@@ -24,3 +24,11 @@ variable "path_to_error" {
 variable "content_version" {
   type          = number 
 }     
+
+variable "assets_path" {
+  type          = string 
+}     
+
+variable "terratowns_access_token" {
+  type          = string
+}
