@@ -28,3 +28,7 @@ variable "content_version" {
 variable "assets_path" {
   type          = string 
 }     
+
+variable "terratowns_access_token" {
+  type          = string
+}

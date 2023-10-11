@@ -7,9 +7,9 @@
 #}
 
 provider "terratowns" {
-  endpoint      = "http://localhost:4567/api"
-  user_uuid     = "e328f4ab-b99f-421c-84c9-4ccea042c7d1"
-  token         = "9b49b3fb-b8e9-483c-b703-97ba88eef8e0"
+  endpoint        = "https://terratowns.cloud/api"
+  user_uuid       = var.user_uuid
+  token           = var.terratowns_access_token
 }
 
 locals {
@@ -25,10 +25,11 @@ module "terrahouse" {
   path_to_error   = var.path_to_error
   content_version = var.content_version 
   assets_path     = var.assets_path
+  user_uuid       = var.user_uuid
 }
 
 resource "terratowns_home" "home" {
-  name = "Rick & Morty. Who Are They????"
+  name = "==== Rick & Morty. Who Are They??? ===="
   description = <<EOF
     "Rick and Morty" is an American animated science fiction sitcom created by Justin Roiland and Dan Harmon. The show first premiered in 2013 and has gained a dedicated fan following. 
     The series primarily focuses on the adventures of its two main characters, Rick Sanchez and Morty Smith.

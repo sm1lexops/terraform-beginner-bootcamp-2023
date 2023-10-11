@@ -58,3 +58,7 @@ variable "assets_path" {
   description = "Path to Assets"
   type        = string
 }
+
+variable "user_uuid" {
+  type        = string
+}
