@@ -3,6 +3,7 @@ tasks:
     env:
       TF_LOG: DEBUG
     before: |
+      cd $THEIA_WORKSPACE_ROOT
       source ./bin/terraform_alias
       sudo apt-get update && sudo apt-get install -y gnupg software-properties-common wget
       wget -O- https://apt.releases.hashicorp.com/gpg | \
