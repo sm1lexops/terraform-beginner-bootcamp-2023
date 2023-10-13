@@ -34,7 +34,7 @@ resource "terratowns_home" "missingo" {
     Morty Smith, on the other hand, is Rick's easily influenced and somewhat naive grandson. Morty often finds himself reluctantly accompanying Rick on various interdimensional and extraterrestrial adventures.
   EOF
 
-  domain_name = module.terrahouse.cloudfront_url
+  domain_name = module.terratowns_missingo.cloudfront_url
   town = "missingo"
   content_version = 1
 }
@@ -42,7 +42,7 @@ resource "terratowns_home" "missingo" {
 module "terratowns_video_valley" {
   source          = "./modules/terrahouse"
   public_path     = var.video_valley.public_path 
-  content_version = var.content_version 
+  content_version = var.video_valley.content_version 
   user_uuid       = var.user_uuid
 }
 
@@ -55,7 +55,7 @@ resource "terratowns_home" "video_valley" {
     Morty Smith, on the other hand, is Rick's easily influenced and somewhat naive grandson. Morty often finds himself reluctantly accompanying Rick on various interdimensional and extraterrestrial adventures.
     The show blends elements of dark humor, satire, and absurdity. It explores a wide range of science fiction concepts, such as alternate dimensions, time travel, and advanced technology, while also addressing philosophical and ethical questions.
   EOF
-  domain_name = module.terrahouse.cloudfront_url
+  domain_name = module.terratowns_video_valley.cloudfront_url
   town = "video-valley"
   content_version = 1
 }
