@@ -27,22 +27,9 @@ variable "tags" {
   default = {}
 }
 
-variable "path_to_index" {
-  description   = "Path to index.html"
+variable "public_path" {
+  description   = "Path to website assets"
   type          = string
-  validation {
-  condition     = fileexists(var.path_to_index)
-  error_message = "The provided path for index.html does not exist."
-  }
-}
-
-variable "path_to_error" {
-  description   = "Path to error.html"
-  type          = string
-  validation {
-  condition     = fileexists(var.path_to_error)
-  error_message = "The provided path for error.html does not exist."
-  }
 }
 
 variable "content_version" {
@@ -52,11 +39,6 @@ variable "content_version" {
     condition     = var.content_version > 0 && floor(var.content_version) == var.content_version
     error_message = "content_version must be a positive integer starting at 1."
   }
-}
-
-variable "assets_path" {
-  description = "Path to Assets"
-  type        = string
 }
 
 variable "user_uuid" {
