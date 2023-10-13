@@ -18,12 +18,11 @@ terraform {
 #      }
 #    }
 
-#    cloud {
-#    organization = "thevopz"
-
-#    workspaces {
-#      name = "root-tf"
-#    }
-#  }
+    cloud {
+    organization = "thevopz"
+    workspaces {
+      name = "root-tf"
+    }
+  }
 }
 

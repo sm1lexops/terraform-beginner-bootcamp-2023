@@ -13,22 +13,28 @@ variable "file_source" {
   default       = null
 }
 
-variable "path_to_index" {
-  type          = string
+variable "missingo" {
+  type          = object({
+    public_path = string
+    content_version = number
+  })
 }
 
-variable "path_to_error" {
-  type          = string
+variable "video_valley" {
+  type          = object({
+    public_path = string
+    content_version = number
+  })
 }
 
 variable "content_version" {
   type          = number 
 }     
 
-variable "assets_path" {
-  type          = string 
-}     
-
 variable "terratowns_access_token" {
+  type          = string
+}
+
+variable "terratowns_endpoint" {
   type          = string
 }
