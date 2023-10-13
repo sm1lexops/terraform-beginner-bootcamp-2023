@@ -148,7 +148,7 @@ video_valley = {
 }
 content_version = 1
 terratowns_endpoint = "$TF_ENDPOINT"
-terratowns_access_token = "$TF_USER_UUID"
+terratowns_access_token = "$TERRATOWNS_ACCESS_KEY"
 EOF
 
 printf "${CYAN}==== ${LABEL2}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
