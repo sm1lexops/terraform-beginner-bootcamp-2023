@@ -94,31 +94,31 @@ if [ -z "$TF_USER_UUID" ]; then
   exit 1
 fi
 
-if [ -z "$PATH_TO_INDEX" ]; then
-  printf "${CYAN}==== ${LABEL6}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
-  printf "${GREEN}==== ${LABEL6_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
-  read -r PATH_TO_INDEX
-  export PATH_TO_INDEX=$PATH_TO_INDEX
-fi  
-
-
-if [ -z "$PATH_TO_INDEX" ]; then
-  printf "${RED}==== ${LABEL6_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
-  exit 1
-fi
-
-if [ -z "$PATH_TO_ERROR" ]; then
-  printf "${CYAN}==== ${LABEL7}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
-  printf "${GREEN}==== ${LABEL7_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
-  read -r PATH_TO_ERROR
-  export PATH_TO_ERROR=$PATH_TO_ERROR
-fi  
-
-
-if [ -z "$PATH_TO_ERROR" ]; then
-  printf "${RED}==== ${LABEL7_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
-  exit 1
-fi
+#if [ -z "$PATH_TO_INDEX" ]; then
+#  printf "${CYAN}==== ${LABEL6}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+#  printf "${GREEN}==== ${LABEL6_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
+#  read -r PATH_TO_INDEX
+#  export PATH_TO_INDEX=$PATH_TO_INDEX
+#fi  
+#
+#
+#if [ -z "$PATH_TO_INDEX" ]; then
+#  printf "${RED}==== ${LABEL6_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
+#  exit 1
+#fi
+#
+#if [ -z "$PATH_TO_ERROR" ]; then
+#  printf "${CYAN}==== ${LABEL7}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+#  printf "${GREEN}==== ${LABEL7_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
+#  read -r PATH_TO_ERROR
+#  export PATH_TO_ERROR=$PATH_TO_ERROR
+#fi  
+#
+#
+#if [ -z "$PATH_TO_ERROR" ]; then
+#  printf "${RED}==== ${LABEL7_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
+#  exit 1
+#fi
 
 
 # Create credentials.tfrc.json for terraform cloud auth
@@ -138,8 +138,17 @@ cat > terraform.tfvars << EOF
 #aws_europe = "$EU_REGION"
 # aws_usa = "$US_REGION"
 user_uuid = "$TF_USER_UUID"
-path_to_index = "$PATH_TO_INDEX"
-path_to_error = "$PATH_TO_ERROR"
+missingo = {
+  public_path = "/workspace/terraform-beginner-bootcamp-2023/public/missingo"
+  content_version = 1
+}
+video_valley = {
+  public_path = "/workspace/terraform-beginner-bootcamp-2023/public/video_valley"
+  content_version = 1
+}
+content_version = 1
+terratowns_endpoint = "$TF_ENDPOINT"
+terratowns_access_token = "$TF_TOKEN"
 EOF
 
 printf "${CYAN}==== ${LABEL2}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
