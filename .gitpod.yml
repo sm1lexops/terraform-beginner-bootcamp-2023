@@ -3,8 +3,7 @@ tasks:
     env:
       TF_LOG: DEBUG
     before: |
-      cd $THEIA_WORKSPACE_ROOT
-      source ./bin/terraform_alias
+      source $THEIA_WORKSPACE_ROOT/bin/terraform_alias
       sudo apt-get update && sudo apt-get install -y gnupg software-properties-common wget
       wget -O- https://apt.releases.hashicorp.com/gpg | \
       gpg --dearmor | \
@@ -13,23 +12,21 @@ tasks:
       sudo apt-get update && sudo apt-get install terraform
   - name: sinatra
     before: | 
-      cd $THEIA_WORKSPACE_ROOT
-      cd terratowns_mock_server
+      cd $THEIA_WORKSPACE_ROOT/terratowns_mock_server
       bundle install
       bundle exec ruby server.rb 
   - name: aws-cli
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
     before: |
-      cd /workspace
+      cd $THEIA_WORKSPACE_ROOT
       curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       unzip awscliv2.zip
       sudo ./aws/install
       rm -Rf aws*
-      cd $THEIA_WORKSPACE_ROOT
   - name: http-server
     before: |
-      cd $PROJECT_ROOT
+      cd $THEIA_WORKSPACE_ROOT
       npm install --global http-server
     command: 
       http-server
