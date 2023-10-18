@@ -25,4 +25,8 @@
 - Build Custom Terrafom Provider
 - Github (Github Flow, branching, versioning/tags and etc.)
 
+> Video Tutorial Content
+
+[ExamPro Terraform Beginner Bootcamp](https://www.youtube.com/watch?v=eiox8xFsCpE&list=PLBfufR7vyJJ4q5YCPl4o2XAzGRZUjuD-A&ab_channel=ExamPro)
+
 Usefull Tool for *.md files: [TOC Generator](https://ecotrust-canada.github.io/markdown-toc/)
