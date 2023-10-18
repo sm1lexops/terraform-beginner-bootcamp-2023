@@ -35,3 +35,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 *credentials*
+
+# Terraform provider go
+terraform-provider-terratowns/terraform-provider-terratowns_v*

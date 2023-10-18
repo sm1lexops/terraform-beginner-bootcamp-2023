@@ -6,7 +6,6 @@
 resource "aws_s3_bucket" "this" {
   count           = var.create ? 1 : 0
 
-  bucket          = var.bucket
   tags            = var.tags
 }
 
@@ -30,9 +29,9 @@ resource "aws_s3_bucket_website_configuration" "this" {
 resource "aws_s3_object" "index_html" {
   bucket        = aws_s3_bucket.this[0].bucket
   key           = "index.html"
-  source        = var.path_to_index
+  source        = "${var.public_path}/index.html"
   content_type  = "text/html"
-  etag          = filemd5(var.path_to_index)
+  etag          = filemd5("${var.public_path}/index.html")
 
   lifecycle {
     replace_triggered_by = [ terraform_data.content_version.output ]
@@ -44,9 +43,9 @@ resource "aws_s3_object" "index_html" {
 resource "aws_s3_object" "error_html" {
   bucket        = aws_s3_bucket.this[0].bucket
   key           = "error.html"
-  source        = var.path_to_error
+  source        = "${var.public_path}/error.html"
   content_type  = "text/html"
-  etag          = filemd5(var.path_to_error)
+  etag          = filemd5("${var.public_path}/error.html")
 
   lifecycle {
     replace_triggered_by  = [ terraform_data.content_version.output ]    
@@ -55,12 +54,12 @@ resource "aws_s3_object" "error_html" {
 }
 
 resource "aws_s3_object" "upload_assets" {
-  for_each     = fileset("${path.root}/modules/terrahouse/assets/", "*.{jpg,png,gif}") 
+  for_each     = fileset("${var.public_path}/assets/", "*.{jpg,png,gif}") 
   bucket        = aws_s3_bucket.this[0].bucket
   key           = "assets/${each.key}"
-  source        = "${path.root}/modules/terrahouse/assets/${each.key}"
-  etag          = filemd5("${path.root}/modules/terrahouse/assets/${each.key}")
-  lifecycle {
+  source        = "${var.public_path}/assets/${each.key}"
+  etag          = filemd5("${var.public_path}/assets/${each.key}")
+  lifecycle { 
     replace_triggered_by  = [ terraform_data.content_version.output ]    
     ignore_changes        = [ etag ]
   }

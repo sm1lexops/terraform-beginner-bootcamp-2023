@@ -45,9 +45,9 @@ if [ -z "$TF_TOKEN" ]; then
   printf "${CYAN}==== ${LABEL1}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
   printf "${GREEN}==== ${LABEL1_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
   read -r terraform_token
+  export TF_TOKEN=$terraform_token
 fi
 
-export TF_TOKEN=$terraform_token
 
 if [ -z "$TF_TOKEN" ]; then
   printf "${RED}==== ${LABEL1_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
@@ -58,9 +58,9 @@ if [ -z "$AWS_ACCESS_KEY_ID" ]; then
   printf "${CYAN}==== ${LABEL3}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
   printf "${GREEN}==== ${LABEL3_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
   read -r AWS_ACCESS_KEY_ID
+  export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 fi  
 
-export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 
 if [ -z "$AWS_ACCESS_KEY_ID" ]; then
   printf "${RED}==== ${LABEL3_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
@@ -72,9 +72,9 @@ if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   printf "${CYAN}==== ${LABEL4}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
   printf "${GREEN}==== ${LABEL4_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
   read -r AWS_SECRET_ACCESS_KEY
+  export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 fi  
 
-export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 
 if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   printf "${RED}==== ${LABEL4_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
@@ -85,40 +85,40 @@ if [ -z "$TF_USER_UUID" ]; then
   printf "${CYAN}==== ${LABEL5}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
   printf "${GREEN}==== ${LABEL5_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
   read -r TF_USER_UUID
+  export TF_USER_UUID=$TF_USER_UUID
 fi  
 
-export TF_USER_UUID=$TF_USER_UUID
 
 if [ -z "$TF_USER_UUID" ]; then
   printf "${RED}==== ${LABEL5_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
   exit 1
 fi
 
-if [ -z "$PATH_TO_INDEX" ]; then
-  printf "${CYAN}==== ${LABEL6}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
-  printf "${GREEN}==== ${LABEL6_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
-  read -r PATH_TO_INDEX
-fi  
-
-export PATH_TO_INDEX=$PATH_TO_INDEX
-
-if [ -z "$PATH_TO_INDEX" ]; then
-  printf "${RED}==== ${LABEL6_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
-  exit 1
-fi
-
-if [ -z "$PATH_TO_ERROR" ]; then
-  printf "${CYAN}==== ${LABEL7}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
-  printf "${GREEN}==== ${LABEL7_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
-  read -r PATH_TO_ERROR
-fi  
-
-export PATH_TO_ERROR=$PATH_TO_ERROR
-
-if [ -z "$PATH_TO_ERROR" ]; then
-  printf "${RED}==== ${LABEL7_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
-  exit 1
-fi
+#if [ -z "$PATH_TO_INDEX" ]; then
+#  printf "${CYAN}==== ${LABEL6}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+#  printf "${GREEN}==== ${LABEL6_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
+#  read -r PATH_TO_INDEX
+#  export PATH_TO_INDEX=$PATH_TO_INDEX
+#fi  
+#
+#
+#if [ -z "$PATH_TO_INDEX" ]; then
+#  printf "${RED}==== ${LABEL6_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
+#  exit 1
+#fi
+#
+#if [ -z "$PATH_TO_ERROR" ]; then
+#  printf "${CYAN}==== ${LABEL7}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+#  printf "${GREEN}==== ${LABEL7_1}${NO_COLOR} ${GREEN}====${NO_COLOR}\n"
+#  read -r PATH_TO_ERROR
+#  export PATH_TO_ERROR=$PATH_TO_ERROR
+#fi  
+#
+#
+#if [ -z "$PATH_TO_ERROR" ]; then
+#  printf "${RED}==== ${LABEL7_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
+#  exit 1
+#fi
 
 
 # Create credentials.tfrc.json for terraform cloud auth
@@ -138,8 +138,17 @@ cat > terraform.tfvars << EOF
 #aws_europe = "$EU_REGION"
 # aws_usa = "$US_REGION"
 user_uuid = "$TF_USER_UUID"
-path_to_index = "$PATH_TO_INDEX"
-path_to_error = "$PATH_TO_ERROR"
+missingo = {
+  public_path = "/workspace/terraform-beginner-bootcamp-2023/public/missingo"
+  content_version = 1
+}
+video_valley = {
+  public_path = "/workspace/terraform-beginner-bootcamp-2023/public/video_valley"
+  content_version = 1
+}
+content_version = 1
+terratowns_endpoint = "$TF_ENDPOINT"
+terratowns_access_token = "$TERRATOWNS_ACCESS_KEY"
 EOF
 
 printf "${CYAN}==== ${LABEL2}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"

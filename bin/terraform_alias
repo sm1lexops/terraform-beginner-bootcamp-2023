@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+grep -q 'alias tfi="terraform init"' ~/.bash_profile
+
+if [ $? -ne 0 ]; then
+  echo 'alias tfi="terraform init"' >> ~/.bash_profile
+  echo 'alias tfp="terraform plan"' >> ~/.bash_profile
+  echo 'alias tfap="terraform apply -auto-approve"' >> ~/.bash_profile
+  echo 'alias tfd="terraform destroy -auto-approve"' >> ~/.bash_profile
+  source ~/.bash_profile
+else
+  echo 'aliases configured'
+fi

@@ -1,22 +1,35 @@
 tasks:
   - name: terraform
+    env:
+      TF_LOG: DEBUG
     before: |
+      source $THEIA_WORKSPACE_ROOT/bin/terraform_alias
       sudo apt-get update && sudo apt-get install -y gnupg software-properties-common wget
       wget -O- https://apt.releases.hashicorp.com/gpg | \
       gpg --dearmor | \
       sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
       echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
       sudo apt-get update && sudo apt-get install terraform
+  - name: sinatra
+    before: | 
+      cd $THEIA_WORKSPACE_ROOT/terratowns_mock_server
+      bundle install
+      bundle exec ruby server.rb 
   - name: aws-cli
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
     before: |
-      cd /workspace
+      cd $THEIA_WORKSPACE_ROOT
       curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       unzip awscliv2.zip
       sudo ./aws/install
       rm -Rf aws*
+  - name: http-server
+    before: |
       cd $THEIA_WORKSPACE_ROOT
+      npm install --global http-server
+    command: 
+      http-server
 # aws cli for macos
       #curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
       #sudo installer -pkg AWSCLIV2.pkg -target /
