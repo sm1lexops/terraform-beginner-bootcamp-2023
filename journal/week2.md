@@ -1,5 +1,16 @@
 # Week 2 — Terraform Beginner Bootcamp 2023
 
+- [Week 2 — Terraform Beginner Bootcamp 2023](#week-2---terraform-beginner-bootcamp-2023)
+  * [Diagramm and Plan](#diagramm-and-plan)
+  * [Developer Mock Server](#developer-mock-server)
+  * [Implement terraform-provider-terratowns Custom Provider](#implement-terraform-provider-terratowns-custom-provider)
+    + [Create `main.go` file in the new `./terraform-provider-terratowns` directory](#create--maingo--file-in-the-new---terraform-provider-terratowns--directory)
+    + [Install all `go` dependencies](#install-all--go--dependencies)
+    + [Create script `./bin/build_provider` for local building our custom provider](#create-script---bin-build-provider--for-local-building-our-custom-provider)
+    + [Create `terraform.rc` to provide local custom provider execution](#create--terraformrc--to-provide-local-custom-provider-execution)
+    + [Build Custom Terraform Provider for Local Use](#build-custom-terraform-provider-for-local-use)
+    + [Implement Connections to Terratowns](#implement-connections-to-terratowns)
+    
 ## Diagramm and Plan
 
 In Week 2, we aim to create a developer mock server for testing our API, using bash scripts for this purpose. Afterward, we will set up a production server and implement terraform-provider-terratowns for general use.
