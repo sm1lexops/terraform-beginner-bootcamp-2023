@@ -2,7 +2,7 @@
 
 **Terraform AWS Cloud Project Bootcamp**
 
-* This Terraform bootcamp provides you with all the necessary knowledge to begin implementing Terraform in your infrastructure and to develop the skills for using infrastructure as code.
+## This Terraform bootcamp equips you with the essential knowledge to start implementing Terraform in your infrastructure and to develop the skills for utilizing infrastructure as code.
 
 > Journal
 
